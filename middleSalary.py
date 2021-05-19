@@ -1,8 +1,8 @@
 import re
+all_salary = 0
 
-all_salary = int(re.sub('\D', '', input("Введите первую сумму?")))
-all_salary += int(re.sub('\D', '', input("Введите вторую сумму?")))
-all_salary += int(re.sub('\D', '', input("Введите третью сумму?")))
+for index in range(3):
+    all_salary += int(re.sub('\D', '', input("Введите сумму №" + str(index + 1) + " ")))
 
 print(all_salary//3)
 

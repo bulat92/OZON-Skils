@@ -1,16 +1,34 @@
-# This is a sample Python script.
+import re
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+while True: #
+    def get_born_year():
+        born_year = re.sub('\D','', input("В каком году вы родились?"))# Все символы кроме цифр отфильтруются здесь
 
+        if born_year: # True если значение не пустое
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+            return int(born_year)
 
+        else:
+            print("Не верная дата! Введите дату заново")
+            return get_born_year()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    def get_settlement_date(born_year):
+        settlement_date = re.sub('\D','', input("К какому году нужно посчитать возраст?")) # Все символы кроме цифр отфильтруются здесь
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        if settlement_date: # True если значение не пустое
+
+            if int(settlement_date) > born_year: # проверка расчетной даты что бы она не была меньше даты рожднеия
+                return int(settlement_date)
+
+            else:
+                print("Не верная дата! Расчетная дата не может быть меньше даты рождения")
+                return get_settlement_date(born_year)
+        else:
+            print("Не верная дата! Введите дату заново")
+            return get_settlement_date(born_year)
+
+    born_year = get_born_year()
+
+    settlement_date = get_settlement_date(born_year) # Передается дата рождения для проверки
+
+    print(settlement_date - born_year)

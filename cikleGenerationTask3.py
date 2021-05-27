@@ -19,22 +19,19 @@ speech_array = [['Коллеги,', 'В то же время,', 'Однако,',
                 'опасных экспериментов.', 'государственно-частных партнеров.', 'цифровых следов граждан.',
                 'нежелательных последствий.', 'случайных открытий.']]
 
-speech_number = 0
 
 all_speech_text = []
 
-while random.randrange(5, 10) > speech_number:
+for speech_number in range(random.randrange(5, 10)):
 
     speech = []
 
     for i in range(len(speech_array)):
 
         speech.append(speech_array[i][random.randrange(0, 7)])
-        speech.append(' ')
 
-    all_speech_text.append(''.join(speech))
+    all_speech_text.append(' '.join(speech))
 
-    speech_number += 1
 
 
 for s in all_speech_text:

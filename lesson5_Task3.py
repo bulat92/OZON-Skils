@@ -15,7 +15,7 @@ for st in file_readed:# цикл для предложений
         if w == 'кошка':
 
             cat_number += 1
-            print(f"{cat_number}. {st}") # вывод строки в которой нашлась кошка
+            print(f"{cat_number}. {st}") # вывод строки в которой нашлась кошка.
 
 print(f"Слово 'кошка' встречается {cat_number} раз!")
 file.close()

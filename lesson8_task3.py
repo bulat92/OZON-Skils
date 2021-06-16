@@ -1,4 +1,4 @@
-from lesson8_task1 import requester_func as requester_func
+from lesson8_task1 import requester_func
 
 soup = requester_func()
 

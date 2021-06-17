@@ -1,13 +1,12 @@
 import re
-from printer import printer as p
 
 cat_value = 0
 
-with open('lesson09_cats_of_ulthar.txt', encoding='ANSI') as file:
-    for v in file.read().split():
+with open('lesson09_cats_of_ulthar.txt', encoding='ANSI') as file: # открыли файл
+    for v in file.read().split():# поделили все на слова
 
-        if re.search(r'кот', v) or re.search(r'кош', v):
-
+        if (re.search(r'кот', v.lower()) or re.search(r'кош', v.lower())) and not re.search(r'котор', v.lower()):#
+        #       ищем сочетание букв кот или кош в нижнем                            но что бы небыло сочетания котор
             cat_value += 1
 
 print(cat_value)

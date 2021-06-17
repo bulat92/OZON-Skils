@@ -1,36 +1,36 @@
 import re
-from printer import printer as p
 
-readed_file = []
-readed_file_in_list = []
+andromeda_list = [] # конечная таблица
+all_column_leng = [58, 14, 0, 0]# ширины колонок которые вычтены отдельно по самому длинному значению
 
 with open('lesson09_closest_galaxies.txt', encoding='utf-8') as file:
-    for v in file.read().split('\n'):
-        readed_file.append(v)
 
-all_column_leng = [67, 26, 31, 94]
+    for line in file.read().split('\n'):# читаем делим на строки
 
-for line in readed_file:
+        list_transient = []# сюда во временный массив будет сохраняться строка
+        column_number = 0# номер колонки для смены ширины колонки в массиве all_column_leng
 
-    list_transient = []
-    column_number = 0
+        if re.search(r'Андромед', f"{line}") and line[3]:
+        # если слово Андромеда есть в строке и у нее есть растояние от земли
+            for value in line.split(','):# еще делим на отдельные слова
 
-    for value in line.split(','):
+                if column_number == 2: # в третьей колонке расстояние до земли
+                    value = round(float(re.sub(r'\[[0-9]+\]|\?', ' ', f"{value}")), 1)
+                    # туть происходит много чего (округление,перевод в дробь из строки, филтрация скобок и тд)
+                value = f"{value}  {' '*(all_column_leng[column_number] - len(str(value)))}"
+                # добавляем пространство к после значения чтоб колонки были ровные   value переводим в строку чтоб узнать длинну
+                list_transient.append(value)
 
+                column_number += 1# переходим на следующую колонку
 
-        value = f"{value}  {' '*(all_column_leng[column_number] - len(value))}"
-        list_transient.append(value)
+            andromeda_list.append(list_transient)# заносим строку в таблицу
 
-        column_number += 1
+andromeda_list[0], andromeda_list[len(andromeda_list)-1] = andromeda_list[len(andromeda_list)-1], andromeda_list[0]
+# таблица изначально была отсортирована по 3 клонке. Спутаем первое и последнее значение
+andromeda_list.sort(key = lambda x: x[2])
+#сортировака по 3 клонке
 
-    readed_file_in_list.append(list_transient)
+for v in andromeda_list:
 
-for v in readed_file_in_list:
+    print(re.sub(r'\'|\,', ' ', f"{v}"))
 
-    result = re.search(r'Андромед', f"{v}")
-
-    if result and v[3]:
-        p(v)
-        #p((re.sub(r'\'|\,|\[|\]', ' ', f"{v}")).strip())
-
-print('======'*30+'\n')

@@ -10,15 +10,14 @@ animals2 = copy.copy(animals)
 
 animals = [len(x) for x in animals] #comprehension
 
-for i in animals:
-    p(i)
+[p(i) for i in animals]
 
 p('animals2')
 
 animals2 = map(lambda x: len(x), animals2) #map
 
-for i in animals2:
-    p(i)
+[p(i) for i in animals2]
+
 
 
 

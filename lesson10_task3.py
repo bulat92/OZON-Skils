@@ -9,11 +9,10 @@ shows = {k: v for k,v in shows.items() if v == 'фантастика' or v == '�
 
 p('dict comprehension')
 
-for k, v in shows.items():
-    p(f'{k},{v}')
+[p(f'{k}|{v}') for k,v in shows.items()]
 
 shows = [k for k in shows]#list comprehension
 
+p('')
 p('list comprehension')
-for i in shows:
-    p(f'{i}')
+[p(f'{i}') for i in shows]

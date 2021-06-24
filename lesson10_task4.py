@@ -7,5 +7,4 @@ p = lambda x: print(x)
 
 shows = {k: {'ratings': ratings[k], 'genre': v} for k, v in shows.items()}#помощью dict comprehension
 
-for k,v in shows.items():
-    p(f'{k}|{v}')
+[p(f'{k}|{v}') for k,v in shows.items()]

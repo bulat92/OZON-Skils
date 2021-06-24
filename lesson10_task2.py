@@ -10,13 +10,13 @@ animals2 = copy.copy(animals)
 
 animals = [x for x in animals if re.match('к|л', x)]  #comprehension
 
-for i in animals:
-    p(i)
+[p(i) for i in animals]
+
 
 p('animals2')
 
 animals2 = filter(lambda x: re.match('к|л', x), animals2) #filter
 
-for i in animals2:
-    p(i)
+[p(i) for i in animals2]
+
 

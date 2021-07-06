@@ -1,12 +1,13 @@
 import unittest
 from calculate_credit import Calculator
 
-class Test_calc:
+class Test_calc(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.sum = Calculator.sum()
-        self.mult = Calculator.mult()
+
+        self.sum = Calculator.sum
+        self.mult = Calculator.mult
 
     def test_correctness(self):
         self.assertEqual(self.sum(5, 8), 13, 'Неверные вычисления')
@@ -19,3 +20,6 @@ class Test_calc:
 
     def test_correctness4(self):
         self.assertEqual(self.mult(5, 56), 61, 'Неверные вычисления')
+
+if __name__ == '__main__':
+    unittest.main()

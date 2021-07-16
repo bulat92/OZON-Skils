@@ -16,17 +16,17 @@ text_Label = tk.Label(justify=LEFT)
 text_Label.pack()
 
 row_three = tk.Frame()
-row_three.pack(side=tk.BOTTOM, fill=tk.X)
+row_three.pack(side=tk.BOTTOM, fill=tk.X)#Третий уровень кнопок 
 
 row_two = tk.Frame()
-row_two.pack(side=tk.BOTTOM, fill=tk.X)
+row_two.pack(side=tk.BOTTOM, fill=tk.X)#Второй уровень кнопок 
 
 row = tk.Frame()
-row.pack(side=tk.BOTTOM, fill=tk.X)
+row.pack(side=tk.BOTTOM, fill=tk.X) #Первый уровень кнопок 
 
 input_city = Entry(master=row_two, width=30)
 input_city.pack(side=tk.LEFT, pady=10, padx=10)
-input_city.insert(0, 'Введите название города')
+input_city.insert(0, 'Введите название города')#Установка значений по умолчанию
 
 choice_city = ttk.Combobox(master=row, values=['Выберите город здесь', 'Moscow', 'Kazan',
                                                       'Sankt Petersburg', 'Ufa'])
@@ -37,22 +37,22 @@ def get_weather_Func():
 
     if choice_city.current() > 0:
         respons = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={choice_city.get()}'
-                               f'&units=metric&lang=ru&appid={api_keys}').json()
-        if respons['cod'] == 200:
+                               f'&units=metric&lang=ru&appid={api_keys}').json()#Запрос погоды в JSON
+        if respons['cod'] == 200:#Если статус запроса успешный
             text_Label['text'] += (f"{date.today().strftime('%d.%m.%Y')} Сегодня температура в "
                                 f"{cities[choice_city.get()]} {respons['main']['temp']}. "
                                 f"На улице {respons['weather'][0]['description']}\n")
         choice_city.current(0)
 
-    if input_city.get() != '':
+    if input_city.get() != 'Введите название города':#Если строка изменена
         respons = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={input_city.get()}'
                                f'&units=metric&lang=ru&appid={api_keys}').json()
-        if  respons['cod'] != 200:
+        if  respons['cod'] != 200:#Если город не найден  
             input_city.delete(0, END)
             input_city.insert(0, "Город не найден")
 
 
-        if respons['cod'] == 200:
+        if respons['cod'] == 200:#Если статус запроса успешный
             text_Label['text'] += (f"{date.today().strftime('%d.%m.%Y')} Сегодня температура в "
                                 f"{input_city.get()} {respons['main']['temp']}. "
                                 f"На улице {respons['weather'][0]['description']}\n")
@@ -67,7 +67,7 @@ def save_weather_Func():
     file.close()
 
 def remove_all():
-    for file in glob.glob("*.dat"):
+    for file in glob.glob("*.dat"): #Получить список файлов с расширением .dat и удалить файлы
         os.remove(file)
 
 show_weather = tk.Button(master=row, text='Показать погоду', command=get_weather_Func)
